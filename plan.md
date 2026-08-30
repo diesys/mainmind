@@ -219,7 +219,7 @@ The agent is explicitly encouraged to propose **better alternatives**, including
 
 ---
 
-# Phase 1 — Project Bootstrap
+# Phase 1 — Project Bootstrap ✅ DONE
 
 Create the minimal SvelteKit project using Bun.
 
@@ -257,7 +257,7 @@ If the chosen bootstrap approach differs from the baseline above, explain why be
 
 ---
 
-# Phase 2 — Static GitHub Pages Configuration
+# Phase 2 — Static GitHub Pages Configuration ✅ DONE
 
 Configure SvelteKit for static output using the official static adapter (`@sveltejs/adapter-static`).
 
