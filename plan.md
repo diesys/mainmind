@@ -123,6 +123,23 @@ The goal is **collaborative decision making where it matters, not micromanagemen
 
 ---
 
+# Confirmed Decisions
+
+The following decisions have been agreed with the user and are binding. Revisit only if the user explicitly requests a change.
+
+- **Bootstrap method:** Official SvelteKit scaffolding, lean/minimal template (`bun x sv create --template minimal --types ts --install bun .`).
+- **Package manager:** Bun (fallback: pnpm only if Bun causes concrete problems).
+- **Svelte AI tooling:** Installed the Svelte OpenCode plugin and `ai-tools` add-ons (MCP server, `svelte-code-writer`, `svelte-core-bestpractices`, `svelte-file-editor`). Use the Svelte MCP tools when writing or editing Svelte code.
+- **GitHub Pages target:** `https://diesys.github.io/mainmind` → base path `/mainmind/`.
+- **Base path handling:** Use `process.env.BASE_PATH` (set to `/${{ github.event.repository.name }}` in CI, empty string in local dev) rather than hardcoding the repo name.
+- **Config location:** Use a dedicated `svelte.config.js` (do NOT configure the adapter in `vite.config.ts`). The existing `vite.config.ts` keeps only Vite plugin + Svelte compiler options (`runes`).
+- **Static rendering mode:** Prerender all routes (`export const prerender = true` in the root layout), set `trailingSlash: 'always'`, and use `adapter-static` with a `404.html` fallback. No SPA fallback.
+- **Game logic porting:** Do not refactor the VanillaJS logic unless necessary; port incrementally after the static setup is verified.
+- **CSS strategy:** Keep the existing global CSS; add only the bare minimum per Svelte component, migrating rules from the global CSS progressively.
+- **TypeScript types:** Let them emerge during the port; do not define them upfront.
+
+---
+
 # Technology
 
 Use:
@@ -242,7 +259,7 @@ If the chosen bootstrap approach differs from the baseline above, explain why be
 
 # Phase 2 — Static GitHub Pages Configuration
 
-Configure SvelteKit for static output using the official static adapter.
+Configure SvelteKit for static output using the official static adapter (`@sveltejs/adapter-static`).
 
 The application must be deployable to GitHub Pages without requiring a server runtime.
 
@@ -253,6 +270,16 @@ Verify locally that the production build produces a fully static application.
 Do not introduce SSR, server routes, or backend infrastructure.
 
 If a GitHub Pages starter is being considered, compare it against configuring `adapter-static` manually before choosing.
+
+Implementation details (per Confirmed Decisions):
+
+- Put the config in `svelte.config.js`; move the adapter out of `vite.config.ts`.
+- `adapter-static` with `fallback: '404.html'`.
+- `paths.base` derived from `process.env.BASE_PATH` (`''` for local dev, `/${{ github.event.repository.name }}` in CI).
+- Root layout exports `prerender = true` and `trailingSlash = 'always'`.
+- Provide a `404.html` fallback page in `static/` (or a prerendered error route) and a `.nojekyll` file in `static/`.
+
+Verify the production build produces a fully static site that serves correctly under the base path.
 
 ---
 
@@ -471,6 +498,8 @@ Keep the workflow minimal.
 Do not add unrelated CI/CD infrastructure.
 
 If there are multiple reasonable GitHub Pages deployment approaches, present the alternatives before choosing one.
+
+The workflow should set `BASE_PATH: '/${{ github.event.repository.name }}'` as a build environment variable so `paths.base` is applied for the production build.
 
 ### GitHub Pages constraints
 
