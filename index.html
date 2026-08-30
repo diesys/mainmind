@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+  <title>MainMind</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="A simple JS MasterMind">
+  <meta name="author" content="Diego Turtulici">
+  <meta name="keywords" content="master mind mastermind js javascript html css web game app">
+  <link rel="canonical" href="http://flowin.space/jastersind/">
+
+  <meta name="HandheldFriendly" content="true" />
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="MobileOptimized" content="320" />
+
+  <meta name="theme-color" content="#df0e0e">
+
+  <meta name="msapplication-navbutton-color" content="#df0e0e">
+
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+
+  <link rel="shortcut icon" href="#">
+
+  <link rel="icon" sizes="256x256" href="img/favicon256.png" type="image/x-icon">
+
+  <link rel="stylesheet" type="text/css" href="css/JasterSind.min.css">
+  <!-- <link rel="stylesheet" type="text/css" href="css/JasterSind.css"> -->
+
+  <script type="text/javascript" src="js/jquery-3.3.1.min.js" defer></script>
+  <script type="text/javascript" src="js/jquery.color.min.js" defer></script>
+  <!-- <script type="text/javascript" src="js/JasterSind.min.js" defer></script> -->
+  <script type="text/javascript" src="js/JasterSind.js" defer></script>
+
+</head>
+
+<body class="">
+
+  <a href="https://flowin.space/covid" target="_blank" id="covid-kit" style="filter:hue-rotate(20deg);top:0;right:0;position:fixed;opacity:.8;cursor:pointer;z-index:1;background:url('https://flowin.space/covid/img/covid_banner_tr_light.png');height:68px;width:110px;"></a>
+  <header>
+    <img src="img/jastersind_line.png" alt="JasterSind logo" id="title" />
+
+    <ol id="solutionContainer" class="dotsContainer hidden">
+      <li id="sol0" class="sol dot"></li>
+      <li id="sol1" class="sol dot"></li>
+      <li id="sol2" class="sol dot"></li>
+      <li id="sol3" class="sol dot"></li>
+    </ol>
+  </header>
+
+  <div id="gameboard">
+
+    <ol id="movesContainer" class="movesContainer"></ol>
+
+    <ol id="color_popup" class="hidden">
+      <!-- <li class="color dot menu active" id="clr-transparent" onclick="changeColor(this)" style="background-color:hsla(0, 0%, 20%, 0.2);border-color:rgba(200,200,200,.2)"></li> -->
+    </ol>
+  </div>
+
+  <div id="menu">
+
+    <select name="colors" id="clr_select" onchange="createGame(this.value)">
+      <option value="7" selected disabled>New game with..</option>
+      <option value="2">2 colors</option>
+      <option value="3">3 colors</option>
+      <option value="4">4 colors</option>
+      <option value="5">5 colors</option>
+      <option value="6">6 colors</option>
+      <option value="7">7 colors</option>
+      <option value="8">8 colors</option>
+      <option value="9">9 colors</option>
+      <option value="10">10 colors</option>
+    </select>
+    
+    <a class="btn modal" href="#howto" id="credits">Help?</a>
+
+  </div>
+
+  <div id="howtos" class="modal container hidden">
+    
+    <div id="howto" class="modal panel hidden">
+      <a class="btn modal close" href="#close">+</a>
+      <!-- <img src="img/logo.png" alt="MinHex logo" /> -->
+      <h1>Are you a <i>Master Mind</i>?</h1>
+      <p>
+        The original <a href="https://en.wikipedia.org/wiki/Mastermind_(board_game)" target="_blank"><i>Master Mind</i></a> is essentially a code-breaking game for two players (here one is the computer).<br> 
+        <br>The game selects some random colors (choose how many to start new game).<br>
+        Your goal is to guess what the game randomly chose! <br>
+        <h3>How?</h3>
+        Before you there are 4 empty slots, click on them to choose your color combination, then submit with the button on the right.<br>
+        <br>The computer gives you an answer trough 4 smaller dots beside your previous guess:
+        <ul>
+          <li><i>Red dot(s)</i>: you positioned well that many colors</li>
+          <li><i>White dot(s)</i>: you chose well that many colors (but in the wrong position)</li>
+        </ul>
+        Example: <ul>
+            <li>
+              If you get 4 white dots that means that you only have to rearrange the colors of your last guess. 
+            </li>
+            <li>
+              If you get 4 red dots... you won! You're a Mastermind!
+            </li>
+        </ul> 
+        <br><br><br> <i>Jaster Sind</i> is a simple <i>JS</i> (JavaScript) rewriting of the original game.
+        <br>The <a target="_blank" href="https://git.eigenlab.org/sbiego/JasterSind">source code</a> is licensed with: <a
+            target="_blank" href="https://www.gnu.org/licenses/agpl-3.0.en.html">AGPLv3</a>, a free licence.
+        <br><br>
+        Hosting: <a target="_blank" href="https://eigenlab.org">eigenLab</a> @ <a target="_blank"
+          href="https://flowin.space">FlowIn.Space</a>
+      </p>
+    </div>
+  </div>
+
+  <!-- <footer class="footer">
+
+          Powered by
+
+          <a href="http://flowin.space">me</a>
+          <a href="github">Nunzio</a>
+          <br> Hosted by
+          <a href="https://eigenlab.org" target="_blank">eigenLab</a>
+
+  </footer> -->
+
+</body>
+
+</html>
