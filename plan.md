@@ -303,7 +303,7 @@ Do not install both toolchains unless there is a concrete requirement.
 
 ---
 
-# Phase 4 — Minimal Project Structure
+# Phase 4 — Minimal Project Structure ✅ DONE
 
 Start with a deliberately small structure.
 
@@ -341,7 +341,7 @@ unless an actual requirement emerges.
 
 ---
 
-# Phase 5 — Isolate Existing Game Logic
+# Phase 5 — Isolate Existing Game Logic ✅ DONE
 
 Before rewriting the game in Svelte, identify the logic already present in the VanillaJS implementation.
 
