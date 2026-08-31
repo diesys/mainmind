@@ -10,6 +10,9 @@
 }
 
 :root {
+  scroll-behavior: smooth;
+
+  /* Theming */
   color-scheme: light dark;
 
   --color-text: light-dark(var(--dark), var(--light));
