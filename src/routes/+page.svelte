@@ -1,31 +1,29 @@
 <script lang="ts">
-  import type { Attachment } from "svelte/attachments";
-  import { resolve } from "$app/paths";
-  import { GUESS_LENGTH, isCompleteGuess } from "$lib/mastermind/game";
-  import { Game } from "$lib/mastermind/state.svelte";
+import type { Attachment } from 'svelte/attachments';
+import { resolve } from '$app/paths';
+import { GUESS_LENGTH, isCompleteGuess } from '$lib/mastermind/game';
+import { Game } from '$lib/mastermind/state.svelte';
 
-  const game = new Game();
+const game = new Game();
 
-  const colorCounts = [2, 3, 4, 5, 6, 7, 8, 9, 10];
-  const slots = Array.from({ length: GUESS_LENGTH }, (_, i) => i);
+const colorCounts = [2, 3, 4, 5, 6, 7, 8, 9, 10];
+const slots = Array.from({ length: GUESS_LENGTH }, (_, i) => i);
 
-  const canSubmit = $derived(
-    game.started && !game.won && isCompleteGuess(game.currGuess),
-  );
-  const canStartNewGame = $derived(!game.started || game.won);
+const canSubmit = $derived(game.started && !game.won && isCompleteGuess(game.currGuess));
+const canStartNewGame = $derived(!game.started || game.won);
 
-  function resetSelectOnWin(startable: boolean): Attachment<HTMLSelectElement> {
-    return (node) => {
-      if (startable) node.selectedIndex = 0;
-    };
-  }
+function resetSelectOnWin(startable: boolean): Attachment<HTMLSelectElement> {
+	return (node) => {
+		if (startable) node.selectedIndex = 0;
+	};
+}
 
-  function onColorCountChange(event: Event): void {
-    const select = event.currentTarget as HTMLSelectElement;
-    const count = Number(select.value);
-    if (!Number.isInteger(count) || count < 2) return;
-    game.start(count);
-  }
+function onColorCountChange(event: Event): void {
+	const select = event.currentTarget as HTMLSelectElement;
+	const count = Number(select.value);
+	if (!Number.isInteger(count) || count < 2) return;
+	game.start(count);
+}
 </script>
 
 <section class="game">
