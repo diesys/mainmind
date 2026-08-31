@@ -9,7 +9,8 @@ const game = new Game();
 const colorCounts = [2, 3, 4, 5, 6, 7, 8, 9, 10];
 const slots = Array.from({ length: GUESS_LENGTH }, (_, i) => i);
 
-const canSubmit = $derived(game.started && !game.won && isCompleteGuess(game.currGuess));
+const gameInProgress = $derived(game.started && !game.won);
+const canSubmit = $derived(gameInProgress && isCompleteGuess(game.currGuess));
 const canStartNewGame = $derived(!game.started || game.won);
 
 function resetSelectOnWin(startable: boolean): Attachment<HTMLSelectElement> {
@@ -40,6 +41,14 @@ function onColorCountChange(event: Event): void {
         <option value={n}>{n} colors</option>
       {/each}
     </select>
+    <button
+      type="button"
+      class="new-game"
+      disabled={!gameInProgress}
+      onclick={() => game.start(0)}
+    >
+      New game
+    </button>
   </section>
 
   {#if game.started}
@@ -166,6 +175,12 @@ function onColorCountChange(event: Event): void {
     line-height: 1.5;
   }
 
+  .setup {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
   .dot {
     width: 1.75rem;
     height: 1.75rem;
@@ -209,6 +224,15 @@ function onColorCountChange(event: Event): void {
   }
 
   .submit:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+  }
+
+  .new-game {
+    border: 1px solid #374151;
+  }
+
+  .new-game:disabled {
     opacity: 0.4;
     cursor: not-allowed;
   }
