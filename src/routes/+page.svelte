@@ -1,45 +1,45 @@
 <script lang="ts">
-import type { Attachment } from 'svelte/attachments';
-import { resolve } from '$app/paths';
-import TargetCursor from '$lib/components/TargetCursor.svelte';
-import { GUESS_LENGTH, isCompleteGuess } from '$lib/mastermind/game';
-import { Game } from '$lib/mastermind/state.svelte';
+  import type { Attachment } from "svelte/attachments";
+  import { resolve } from "$app/paths";
+  import TargetCursor from "$lib/components/TargetCursor.svelte";
+  import { GUESS_LENGTH, isCompleteGuess } from "$lib/mastermind/game";
+  import { Game } from "$lib/mastermind/state.svelte";
 
-// import BorderGlow from '$lib/components/BorderGlow.svelte';
+  // import BorderGlow from '$lib/components/BorderGlow.svelte';
 
-const game = new Game();
+  const game = new Game();
 
-const colorCounts = [2, 3, 4, 5, 6, 7, 8, 9, 10];
-const slots = Array.from({ length: GUESS_LENGTH }, (_, i) => i);
+  const colorCounts = [2, 3, 4, 5, 6, 7, 8, 9, 10];
+  const slots = Array.from({ length: GUESS_LENGTH }, (_, i) => i);
 
-// BorderGlow (disattivato): configurazione del glow direzionale
-// const glowProps = {
-//   edgeSensitivity: 25,
-//   glowIntensity: 1.2,
-//   glowRadius: 7,
-//   colors: ['#FF8A4C', '#FFC18A', '#FF6B2C'] as string[]
-// } as const;
+  // BorderGlow (disattivato): configurazione del glow direzionale
+  // const glowProps = {
+  //   edgeSensitivity: 25,
+  //   glowIntensity: 1.2,
+  //   glowRadius: 7,
+  //   colors: ['#FF8A4C', '#FFC18A', '#FF6B2C'] as string[]
+  // } as const;
 
-const gameInProgress = $derived(game.started && !game.won);
-const canSubmit = $derived(gameInProgress && isCompleteGuess(game.currGuess));
-const canStartNewGame = $derived(!game.started || game.won);
+  const gameInProgress = $derived(game.started && !game.won);
+  const canSubmit = $derived(gameInProgress && isCompleteGuess(game.currGuess));
+  const canStartNewGame = $derived(!game.started || game.won);
 
-function resetSelectOnWin(startable: boolean): Attachment<HTMLSelectElement> {
-  return (node) => {
-    if (startable) node.selectedIndex = 0;
-  };
-}
+  function resetSelectOnWin(startable: boolean): Attachment<HTMLSelectElement> {
+    return (node) => {
+      if (startable) node.selectedIndex = 0;
+    };
+  }
 
-function onColorCountChange(event: Event): void {
-  const select = event.currentTarget as HTMLSelectElement;
-  const count = Number(select.value);
-  if (!Number.isInteger(count) || count < 2) return;
-  game.start(count);
-}
+  function onColorCountChange(event: Event): void {
+    const select = event.currentTarget as HTMLSelectElement;
+    const count = Number(select.value);
+    if (!Number.isInteger(count) || count < 2) return;
+    game.start(count);
+  }
 </script>
 
 <section class="game">
-	<TargetCursor targetSelector=".dot, button, select" />
+  <TargetCursor targetSelector=".dot, button, select" />
 
   <section class="setup">
     <label for="color-count">New game with</label>
@@ -233,7 +233,7 @@ function onColorCountChange(event: Event): void {
     padding: 0.375rem 0.75rem;
     border: 1px solid #374151;
     border-radius: 0.25rem;
-    background: #f9fafb;
+    /*background: #f9fafb;*/
   }
 
   .submit:disabled {
