@@ -1,13 +1,24 @@
 <script lang="ts">
 import type { Attachment } from 'svelte/attachments';
 import { resolve } from '$app/paths';
+import TargetCursor from '$lib/components/TargetCursor.svelte';
 import { GUESS_LENGTH, isCompleteGuess } from '$lib/mastermind/game';
 import { Game } from '$lib/mastermind/state.svelte';
+
+// import BorderGlow from '$lib/components/BorderGlow.svelte';
 
 const game = new Game();
 
 const colorCounts = [2, 3, 4, 5, 6, 7, 8, 9, 10];
 const slots = Array.from({ length: GUESS_LENGTH }, (_, i) => i);
+
+// BorderGlow (disattivato): configurazione del glow direzionale
+// const glowProps = {
+//   edgeSensitivity: 25,
+//   glowIntensity: 1.2,
+//   glowRadius: 7,
+//   colors: ['#FF8A4C', '#FFC18A', '#FF6B2C'] as string[]
+// } as const;
 
 const gameInProgress = $derived(game.started && !game.won);
 const canSubmit = $derived(gameInProgress && isCompleteGuess(game.currGuess));
@@ -28,6 +39,8 @@ function onColorCountChange(event: Event): void {
 </script>
 
 <section class="game">
+	<TargetCursor targetSelector=".dot, button, select" />
+
   <section class="setup">
     <label for="color-count">New game with</label>
     <select
@@ -182,8 +195,8 @@ function onColorCountChange(event: Event): void {
   }
 
   .dot {
-    width: 1.75rem;
-    height: 1.75rem;
+    width: 2.5rem;
+    height: 2.5rem;
     border-radius: 999px;
     border: 2px solid #6b7280;
     box-sizing: border-box;

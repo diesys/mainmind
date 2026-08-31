@@ -1,3 +1,4 @@
 :root {
   color-scheme: light dark;
+  --color-text: light-dark(#1f2937, #f3f4f6);
 }
