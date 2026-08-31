@@ -405,7 +405,7 @@ Report it to the user and let the user decide whether it should remain or change
 
 ---
 
-# Phase 7 — Minimal Game UI
+# Phase 7 — Minimal Game UI ✅ DONE
 
 Create the first playable version with intentionally minimal UI.
 
