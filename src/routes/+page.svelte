@@ -13,16 +13,16 @@ const canSubmit = $derived(game.started && !game.won && isCompleteGuess(game.cur
 const canStartNewGame = $derived(!game.started || game.won);
 
 function resetSelectOnWin(startable: boolean): Attachment<HTMLSelectElement> {
-	return (node) => {
-		if (startable) node.selectedIndex = 0;
-	};
+  return (node) => {
+    if (startable) node.selectedIndex = 0;
+  };
 }
 
 function onColorCountChange(event: Event): void {
-	const select = event.currentTarget as HTMLSelectElement;
-	const count = Number(select.value);
-	if (!Number.isInteger(count) || count < 2) return;
-	game.start(count);
+  const select = event.currentTarget as HTMLSelectElement;
+  const count = Number(select.value);
+  if (!Number.isInteger(count) || count < 2) return;
+  game.start(count);
 }
 </script>
 

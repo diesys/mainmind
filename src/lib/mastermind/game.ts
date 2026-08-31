@@ -8,16 +8,16 @@ export const GUESS_LENGTH = 4;
  * in `[0, nColors)` (ported from `createGame` in the VanillaJS version).
  */
 export function generateSolution(nColors: number): Guess {
-	const solution: Guess = [];
-	for (let i = 0; i < GUESS_LENGTH; i++) {
-		solution.push(Math.floor(Math.random() * nColors));
-	}
-	return solution;
+  const solution: Guess = [];
+  for (let i = 0; i < GUESS_LENGTH; i++) {
+    solution.push(Math.floor(Math.random() * nColors));
+  }
+  return solution;
 }
 
 /** Returns a guess with all slots empty. */
 export function makeEmptyGuess(): Guess {
-	return Array.from({ length: GUESS_LENGTH }, () => -1);
+  return Array.from({ length: GUESS_LENGTH }, () => -1);
 }
 
 /**
@@ -25,11 +25,11 @@ export function makeEmptyGuess(): Guess {
  * Note: the hue step uses `360 / nColors + 1`, matching the original formula.
  */
 export function buildPalette(nColors: number): string[] {
-	const colors: string[] = [];
-	for (let i = 0; i < nColors; i++) {
-		colors.push(`hsl(${Math.ceil(i * (360 / nColors + 1))},80%,50%)`);
-	}
-	return colors;
+  const colors: string[] = [];
+  for (let i = 0; i < nColors; i++) {
+    colors.push(`hsl(${Math.ceil(i * (360 / nColors + 1))},80%,50%)`);
+  }
+  return colors;
 }
 
 /**
@@ -44,34 +44,34 @@ export function buildPalette(nColors: number): string[] {
  * arrays are never mutated.
  */
 export function check(target: Guess, guess: Guess): Feedback {
-	const res: Feedback = [0, 0];
-	const targetCopy: (ColorIndex | undefined)[] = [...target];
-	const guessCopy: (ColorIndex | undefined)[] = [...guess];
+  const res: Feedback = [0, 0];
+  const targetCopy: (ColorIndex | undefined)[] = [...target];
+  const guessCopy: (ColorIndex | undefined)[] = [...guess];
 
-	for (let i = 0; i < guessCopy.length; i++) {
-		if (targetCopy[i] === guessCopy[i]) {
-			targetCopy[i] = undefined;
-			guessCopy[i] = undefined;
-			res[0] += 1;
-		}
-	}
+  for (let i = 0; i < guessCopy.length; i++) {
+    if (targetCopy[i] === guessCopy[i]) {
+      targetCopy[i] = undefined;
+      guessCopy[i] = undefined;
+      res[0] += 1;
+    }
+  }
 
-	for (let i = 0; i < guessCopy.length; i++) {
-		if (guessCopy[i] !== undefined && targetCopy.includes(guessCopy[i])) {
-			targetCopy[targetCopy.indexOf(guessCopy[i])] = undefined;
-			res[1] += 1;
-		}
-	}
+  for (let i = 0; i < guessCopy.length; i++) {
+    if (guessCopy[i] !== undefined && targetCopy.includes(guessCopy[i])) {
+      targetCopy[targetCopy.indexOf(guessCopy[i])] = undefined;
+      res[1] += 1;
+    }
+  }
 
-	return res;
+  return res;
 }
 
 /** True when every slot of the guess is filled (none left as -1). */
 export function isCompleteGuess(guess: Guess): boolean {
-	return guess.indexOf(-1) === -1;
+  return guess.indexOf(-1) === -1;
 }
 
 /** True when the feedback means all pegs are correct in color and position. */
 export function isWin(feedback: Feedback): boolean {
-	return feedback[0] === GUESS_LENGTH;
+  return feedback[0] === GUESS_LENGTH;
 }
