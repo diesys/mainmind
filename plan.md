@@ -468,7 +468,7 @@ Introduce them when there is an actual need.
 
 ---
 
-# Phase 9 — Rules Page
+# Phase 9 — Rules Page ✅ DONE
 
 Add a minimal `/rules` page.
 

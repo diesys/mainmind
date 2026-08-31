@@ -1,5 +1,6 @@
 <script lang="ts">
 import type { Attachment } from 'svelte/attachments';
+import { resolve } from '$app/paths';
 import { GUESS_LENGTH, isCompleteGuess } from '$lib/mastermind/game';
 import { Game } from '$lib/mastermind/state.svelte';
 
@@ -145,6 +146,10 @@ function onColorCountChange(event: Event): void {
 			</section>
 		{/if}
 	{/if}
+
+	<footer>
+		<a href={resolve('/rules')}>How to play</a>
+	</footer>
 </section>
 
 <style>
@@ -274,5 +279,13 @@ function onColorCountChange(event: Event): void {
 		padding: 0;
 		display: flex;
 		gap: 0.5rem;
+	}
+
+	footer {
+		margin-top: 2rem;
+	}
+
+	footer a {
+		color: #6b7280;
 	}
 </style>
